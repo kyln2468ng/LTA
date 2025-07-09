@@ -14,6 +14,7 @@ private:
 	float velocityY;
 	bool onGround;
 	bool prevPushed;
+	bool nowPushued;
 
 	float Gravity;
 	float JumpHeight;

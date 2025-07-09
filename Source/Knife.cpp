@@ -30,7 +30,7 @@ void Knife::Update()
 	float dt = Time::DeltaTime();
 	position.x += speed_ * dt;
 	knifeTimer_ -= dt;
-	if (dt <= 0)
+	if (knifeTimer_ <= 0)
 	{
 		isAlive = false;
 	}
@@ -38,6 +38,7 @@ void Knife::Update()
 
 void Knife::Draw()
 {
+	if (!isAlive) return;
 	Object2D::Draw();
 
 
