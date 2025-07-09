@@ -62,7 +62,9 @@
     <ClCompile Include="Source\CsvReader.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Knife.cpp" />
+    <ClCompile Include="Source\Knife.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />

@@ -14,6 +14,7 @@ Knife::Knife(VECTOR2 position)
 	speed_ = 200.0f;
 	knifeTimer_ = 3.0f;
 	isFired_ = false;
+	dirRight = true;
 }
 
 Knife::~Knife()
@@ -28,11 +29,17 @@ Knife::~Knife()
 void Knife::Update()
 {
 	float dt = Time::DeltaTime();
-	position.x += speed_ * dt;
+
+	if (dirRight)
+		position.x += speed_ * dt;
+	else
+		position.x -= speed_ * dt;
+	
 	knifeTimer_ -= dt;
 	if (knifeTimer_ <= 0)
 	{
 		isAlive = false;
+		
 	}
 }
 

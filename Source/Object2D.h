@@ -6,6 +6,12 @@ struct VECTOR2 {
 	VECTOR2() { x = 0; y = 0; }
 	VECTOR2(float _x, float _y) { x = _x; y = _y; }
 };
+
+enum class Direction {
+	Left,
+	Right
+};
+
 inline VECTOR2 operator -(VECTOR2 a, VECTOR2 b) {
 	VECTOR2 r;
 	r.x = a.x - b.x;
@@ -32,11 +38,14 @@ public:
 	virtual void Draw() override;
 	VECTOR2 GetPosition() { return position; }
 	void SetAlive(bool alive) { isAlive = alive; }
+	bool GetAlive() const { return isAlive; }
+
 protected:
 	int hImage; // ‰æ‘œ‚ğ“Ç‚Ş‚½‚ß
 	int anim; // ŠG‚ÌêŠ
 	int animY; // ŠG‚ÌêŠ
 	bool isAlive; // ¶‚«‚Ä‚é‚©€‚ñ‚Å‚é‚©
+	bool dirRight; // ¶‰E‚Ç‚Á‚¿Œü‚¢‚Ä‚é‚©
 	VECTOR2 position; // À•W
 	VECTOR2 imageSize; // ‚P‚Â‚ÌŠG‚Ì‘å‚«‚³
 };

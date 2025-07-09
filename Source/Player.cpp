@@ -14,6 +14,12 @@ Player::Player() : Player(VECTOR2(100,200))
 }
 
 Player::Player(VECTOR2 pos)
+	:Gravity(0),
+	JumpHeight(0),
+	moveSpeed(0),
+	knife_(0),
+	nowPushued(false),onGround(true),prevPushed(false)
+
 {
 	// パラメーターを読む
 	CsvReader* csv = new CsvReader("data/playerParam.csv");
@@ -48,6 +54,7 @@ Player::~Player()
 
 void Player::Update()
 {
+	nowPushued = false;
 	Stage* st = FindGameObject<Stage>();
 	if (CheckHitKey(KEY_INPUT_D)) {
 		position.x += moveSpeed;
@@ -66,10 +73,10 @@ void Player::Update()
 	
 	if (CheckHitKey(KEY_INPUT_N))
 	{
-		knife_ = new Knife(position);
-		knife_->SetPos(position);
-		knife_->SetKnifeTimer(3.0f);
+		nowPushued = true;
+		KnifeSrrow();
 	}
+
 
 	if (onGround) {
 		if (CheckHitKey(KEY_INPUT_SPACE)) {
@@ -82,6 +89,8 @@ void Player::Update()
 			prevPushed = false;
 		}
 	}
+
+
 	{
 		position.y += velocityY;
 		velocityY += Gravity;
@@ -113,6 +122,7 @@ void Player::Update()
 			}
 		}
 	}
+
 	// プレイヤーの表示位置が、600よりも右だったら、右にスクロールする
 	// プレイヤーの表示位置が、400よりも左だったら、左にスクロール
 	if (st != nullptr) {
@@ -134,6 +144,7 @@ void Player::Update()
 	}
 	ImGui::Begin("Player");
 	ImGui::Checkbox("onGround", &onGround);
+	ImGui::InputFloat("positionX", &position.x);
 	ImGui::InputFloat("positionY", &position.y);
 	ImGui::End();
 }
@@ -145,4 +156,21 @@ void Player::Draw()
 	float x = position.x - st->ScrollX();
 	DrawBox(x - 24, position.y - 32, x + 24, position.y + 32,
 		GetColor(255, 0, 0), FALSE);
+}
+
+void Player::KnifeSrrow()
+{
+	if (nowPushued && prevPushed == false && knife_ == nullptr)
+	{
+		knife_ = new Knife(position);
+		knife_->SetPos(position);
+		knife_->SetKnifeTimer(3.0f);
+		prevPushed = nowPushued;
+	}
+
+	if (knife_ != nullptr && !knife_->GetAlive())
+	{
+		knife_->DestroyMe();
+		knife_ = nullptr;
+	}
 }

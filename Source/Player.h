@@ -10,6 +10,7 @@ public:
 	~Player();
 	void Update() override;
 	void Draw() override;
+	void KnifeSrrow();
 private:
 	float velocityY;
 	bool onGround;
