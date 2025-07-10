@@ -11,11 +11,14 @@ public:
 	void Update() override;
 	void Draw() override;
 	void KnifeSrrow();
+	void WorkMortion();
 private:
 	float velocityY;
 	bool onGround;
-	bool prevPushed;
-	bool nowPushued;
+	bool prevPushed; // ナイフ投げる判定一回とるための変数
+	bool nowPushued; // ナイフ投げる判定一回とるための変数
+	bool prevPushuedS; // ジャンプの判定とるための変数
+	bool nowPushuedS; // ジャンプの判定とるための変数
 
 	float Gravity;
 	float JumpHeight;

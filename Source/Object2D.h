@@ -45,7 +45,7 @@ protected:
 	int anim; // ŠG‚ÌêŠ
 	int animY; // ŠG‚ÌêŠ
 	bool isAlive; // ¶‚«‚Ä‚é‚©€‚ñ‚Å‚é‚©
-	bool dirRight; // ¶‰E‚Ç‚Á‚¿Œü‚¢‚Ä‚é‚©
+	//bool dirRight; // ¶‰E‚Ç‚Á‚¿Œü‚¢‚Ä‚é‚©
 	VECTOR2 position; // À•W
 	VECTOR2 imageSize; // ‚P‚Â‚ÌŠG‚Ì‘å‚«‚³
 };

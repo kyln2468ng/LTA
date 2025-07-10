@@ -9,6 +9,18 @@
 //static const float JumpHeight = 64.0f * 2.0f;
 //static const float JumpV0 = -sqrtf(2.0f * Gravity * JumpHeight);
 
+namespace
+{
+	bool dir = true;
+	float mcTime = 0.3f;
+	float animTimer = 0.0f;
+	const int LeftLimit_ = 24;
+	int JumpCnt = 0;
+	const int MaxJumpCount = 2;
+	float cTimer = 3.0;
+	int pCount = 0;
+}
+
 Player::Player() : Player(VECTOR2(100,200))
 {
 }
@@ -55,6 +67,7 @@ Player::~Player()
 void Player::Update()
 {
 	nowPushued = false;
+	nowPushuedS = false;
 	Stage* st = FindGameObject<Stage>();
 	if (CheckHitKey(KEY_INPUT_D)) {
 		position.x += moveSpeed;
@@ -62,6 +75,9 @@ void Player::Update()
 		position.x -= push;
 		push = st->CheckRight(position + VECTOR2(24, 31)); // 右下
 		position.x -= push;
+		dir = true;
+		animY = 3;
+		WorkMortion();
 	}
 	if (CheckHitKey(KEY_INPUT_A)) {
 		position.x -= moveSpeed;
@@ -69,6 +85,13 @@ void Player::Update()
 		position.x += push;
 		push = st->CheckLeft(position + VECTOR2(-24, 31)); // 左下
 		position.x += push;
+		if (position.x - LeftLimit_< 0)
+		{
+			position.x = LeftLimit_;
+		}
+		dir = false;
+		animY = 1;
+		WorkMortion();
 	}
 	
 	if (CheckHitKey(KEY_INPUT_N))
@@ -77,8 +100,28 @@ void Player::Update()
 		KnifeSrrow();
 	}
 
+	if (onGround)
+	{
+		JumpCnt = 0;
+	}
 
-	if (onGround) {
+	if (CheckHitKey(KEY_INPUT_SPACE))
+	{
+		nowPushuedS = true;
+	}
+
+	if (prevPushuedS == false && nowPushuedS)
+	{
+		if (JumpCnt < MaxJumpCount)
+		{
+			velocityY = JumpV0;
+			JumpCnt++;
+		}
+	}
+
+	prevPushuedS = nowPushuedS;
+
+	/*if (onGround) {
 		if (CheckHitKey(KEY_INPUT_SPACE)) {
 			if (prevPushed == false) {
 				velocityY = JumpV0;
@@ -88,7 +131,7 @@ void Player::Update()
 		else {
 			prevPushed = false;
 		}
-	}
+	}*/
 
 
 	{
@@ -160,17 +203,50 @@ void Player::Draw()
 
 void Player::KnifeSrrow()
 {
+	cTimer -= Time::DeltaTime();
 	if (nowPushued && prevPushed == false && knife_ == nullptr)
 	{
-		knife_ = new Knife(position);
+		knife_ = new Knife(position, dir);
 		knife_->SetPos(position);
 		knife_->SetKnifeTimer(3.0f);
-		prevPushed = nowPushued;
+		cTimer = 3.0f;
+		if (dir)
+		{
+			knife_->SetDirR(true);
+		}
+		else
+			knife_->SetDirR(false);		
+	}
+
+
+	if (CheckHitKey(KEY_INPUT_N) && knife_ != nullptr && cTimer > 0.0f)
+	{
+		position = knife_->GetPosition();  // ワープ
+		knife_->SetKnifeTimer(0);          // タイマー切る（無効化）
+		knife_->DestroyMe();
+		knife_ = nullptr;
 	}
 
 	if (knife_ != nullptr && !knife_->GetAlive())
 	{
 		knife_->DestroyMe();
 		knife_ = nullptr;
+	}
+
+	prevPushed = nowPushued;
+}
+
+void Player::WorkMortion()
+{
+	animTimer += Time::DeltaTime();
+	if (animTimer >= mcTime)
+	{
+		if (anim == 5) {
+			anim = 6;
+		}
+		else {
+			anim = 5;
+		}
+		animTimer = 0.0f;
 	}
 }

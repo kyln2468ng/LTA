@@ -1,7 +1,7 @@
 #include "Knife.h"
 #include <assert.h>
 
-Knife::Knife(VECTOR2 position)
+Knife::Knife(VECTOR2 position,bool dirRight)
 {
 	hImage = LoadGraph("data/image/item.png");
 	assert(hImage > 0);
@@ -14,7 +14,6 @@ Knife::Knife(VECTOR2 position)
 	speed_ = 200.0f;
 	knifeTimer_ = 3.0f;
 	isFired_ = false;
-	dirRight = true;
 }
 
 Knife::~Knife()
