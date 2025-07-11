@@ -19,6 +19,7 @@ namespace
 	const int MaxJumpCount = 2;
 	float cTimer = 3.0;
 	int pCount = 0;
+	const int MaxPushuCount = 2;
 }
 
 Player::Player() : Player(VECTOR2(100,200))
@@ -97,7 +98,16 @@ void Player::Update()
 	if (CheckHitKey(KEY_INPUT_N))
 	{
 		nowPushued = true;
-		KnifeSrrow();
+		//KnifeSrrow();
+	}
+
+	if (prevPushed == false && nowPushued)
+	{
+		if (pCount < MaxPushuCount && knife_ == nullptr)
+		{
+			KnifeSrrow();
+			pCount++; // pCount足されるタイムんぐ調整必要
+		}
 	}
 
 	if (onGround)
@@ -119,6 +129,7 @@ void Player::Update()
 		}
 	}
 
+	prevPushed = nowPushued;
 	prevPushuedS = nowPushuedS;
 
 	/*if (onGround) {
@@ -210,30 +221,34 @@ void Player::KnifeSrrow()
 		knife_->SetPos(position);
 		knife_->SetKnifeTimer(3.0f);
 		cTimer = 3.0f;
+		
 		if (dir)
 		{
 			knife_->SetDirR(true);
 		}
 		else
 			knife_->SetDirR(false);		
+		return;
 	}
 
 
-	if (CheckHitKey(KEY_INPUT_N) && knife_ != nullptr && cTimer > 0.0f)
+	if (pCount == 1 && knife_ != nullptr && cTimer > 0.0f)
 	{
 		position = knife_->GetPosition();  // ワープ
 		knife_->SetKnifeTimer(0);          // タイマー切る（無効化）
 		knife_->DestroyMe();
 		knife_ = nullptr;
+		pCount = 0;
+		return;
 	}
 
 	if (knife_ != nullptr && !knife_->GetAlive())
 	{
 		knife_->DestroyMe();
 		knife_ = nullptr;
+		pCount = 0;
 	}
 
-	prevPushed = nowPushued;
 }
 
 void Player::WorkMortion()
