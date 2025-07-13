@@ -11,6 +11,7 @@ public:
 	void SetKnifeTimer(float nTime) { knifeTimer_ = nTime; }
 	void SetPos(VECTOR2 pos) { position = pos; }
 	void SetDirR(bool dir) { dirRight = dir; }
+	//void GetTimer() { return knifeTimer_; }
 private:
 	float knifeTimer_;
 	float speed_;
