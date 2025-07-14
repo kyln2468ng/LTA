@@ -9,6 +9,8 @@
 //static const float JumpHeight = 64.0f * 2.0f;
 //static const float JumpV0 = -sqrtf(2.0f * Gravity * JumpHeight);
 
+//タイトル「シャープワープ」
+
 namespace
 {
 	bool dir = true;
@@ -94,6 +96,11 @@ void Player::Update()
 		dir = false;
 		animY = 1;
 		WorkMortion();
+	}
+
+	if (position.y + 31 > 1280)
+	{
+		DestroyMe();
 	}
 	
 	if (CheckHitKey(KEY_INPUT_N))

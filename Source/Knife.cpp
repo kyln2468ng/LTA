@@ -18,7 +18,7 @@ Knife::Knife(VECTOR2 position,bool dirRight)
 	animY = 1;
 
 	isAlive = true;
-	speed_ = 200.0f;
+	speed_ = 400.0f;
 	knifeTimer_ = 3.0f;
 	isFired_ = false;
 }
@@ -39,18 +39,18 @@ void Knife::Update()
 
 	if (dirRight)
 	{
-		push = st->CheckRight(position + VECTOR2(24, -31));
+		push = st->CheckRight(position + VECTOR2(32, -31));
 		position.x -= push;
-		push = st->CheckRight(position + VECTOR2(24, 31));
-		push -= push;
+		push = st->CheckRight(position + VECTOR2(32, 31));
+		position.x -= push;
 
 		position.x += speed_ * dt;
 	}
 	else
 	{
-		push = st->CheckLeft(position + VECTOR2(-24, -31));
+		push = st->CheckLeft(position + VECTOR2(-32, -31));
 		position.x += push;
-		push = st->CheckLeft(position + VECTOR2(-24, 31));
+		push = st->CheckLeft(position + VECTOR2(-32, 31));
 		position.x += push;
 
 		position.x -= speed_ * dt;
