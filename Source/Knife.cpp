@@ -13,14 +13,13 @@ Knife::Knife(VECTOR2 position,bool dirRight)
 	hImage = LoadGraph("data/image/item.png");
 	assert(hImage > 0);
 
-	imageSize = VECTOR2(64, 64);
+	imageSize = VECTOR2(64, 32);
 	anim = 1;
 	animY = 1;
 
 	isAlive = true;
 	speed_ = 400.0f;
-	knifeTimer_ = 3.0f;
-	isFired_ = false;
+	knifeTimer_ = 2.0f;
 }
 
 Knife::~Knife()
@@ -39,18 +38,20 @@ void Knife::Update()
 
 	if (dirRight)
 	{
-		push = st->CheckRight(position + VECTOR2(32, -31));
+		push = st->CheckRight(position + VECTOR2(32, -16));
 		position.x -= push;
-		push = st->CheckRight(position + VECTOR2(32, 31));
+		push = st->CheckRight(position + VECTOR2(32, 16));
 		position.x -= push;
+
+			speed_ = 400.0f;
 
 		position.x += speed_ * dt;
 	}
 	else
 	{
-		push = st->CheckLeft(position + VECTOR2(-32, -31));
+		push = st->CheckLeft(position + VECTOR2(-32, -16));
 		position.x += push;
-		push = st->CheckLeft(position + VECTOR2(-32, 31));
+		push = st->CheckLeft(position + VECTOR2(-32, 16));
 		position.x += push;
 
 		position.x -= speed_ * dt;
@@ -94,8 +95,12 @@ void Knife::Update()
 void Knife::Draw()
 {
 	if (!isAlive) return;
+	int x = position.x - imageSize.x / 2.0f;
+	int y = position.y - imageSize.y / 2.0f;
 	Object2D::Draw();
-	DrawBox(position.x - 24, position.y - 32, position.x + 24, position.y + 32,
-		GetColor(255, 0, 0), FALSE);
+	//DrawRectExtendGraph(x, y, x + imageSize.x, y + imageSize.y, imageSize.x * anim, imageSize.x * animY, imageSize.x * anim, imageSize.x*anim, hImage, TRUE);
+	//DrawRectGraph(x, y, anim * imageSize.x, animY * imageSize.y, imageSize.x, imageSize.y, hImage, TRUE);
+	
+	//DrawBox(position.x - 24, position.y - 16, position.x + 24, position.y + 16,	GetColor(255, 0, 0), FALSE);
 
 }

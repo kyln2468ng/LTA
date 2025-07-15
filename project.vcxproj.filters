@@ -65,6 +65,9 @@
     <ClCompile Include="Source\Knife.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ResultScene.cpp">
+      <Filter>ResultScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -141,6 +144,9 @@
     <ClInclude Include="Source\Knife.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ResultScene.h">
+      <Filter>ResultScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -157,6 +163,9 @@
     </Filter>
     <Filter Include="ImGui">
       <UniqueIdentifier>{a717257b-67b3-4bfa-834c-1e34032b33b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResultScene">
+      <UniqueIdentifier>{601b5ec5-a366-42d2-b4db-28a1145e249a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

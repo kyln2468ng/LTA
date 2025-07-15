@@ -23,6 +23,7 @@ namespace
 	int pCount = 0;
 	const int MaxPushuCount = 2;
 	bool knifeTp = false;
+	bool IsFired = true;
 }
 
 Player::Player() : Player(VECTOR2(100,200))
@@ -103,7 +104,7 @@ void Player::Update()
 		DestroyMe();
 	}
 	
-	if (CheckHitKey(KEY_INPUT_N))
+	if (CheckHitKey(KEY_INPUT_N) && IsFired)
 	{
 		nowPushued = true;
 		//KnifeSrrow();
@@ -127,6 +128,7 @@ void Player::Update()
 	if (onGround)
 	{
 		JumpCnt = 0;
+		IsFired = true;
 	}
 
 	if (CheckHitKey(KEY_INPUT_SPACE))
@@ -265,13 +267,14 @@ void Player::KnifeSrrow()
 	//	knife_ = nullptr;
 	//}
 	
-	if (knife_ != nullptr && knifeTp == true) //&& cTimer > 0.0f)
+	if (knife_ != nullptr && knifeTp == true && IsFired) //&& cTimer > 0.0f)
 	{
 		position = knife_->GetPosition();  // ワープ
 		knife_->SetKnifeTimer(0);          // タイマー切る（無効化）
 		knife_->DestroyMe();
 		knife_ = nullptr;
 		knifeTp = false;
+		IsFired = false;
 		return;
 	}
 

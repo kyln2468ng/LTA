@@ -15,6 +15,5 @@ public:
 private:
 	float knifeTimer_;
 	float speed_;
-	bool isFired_;
 	bool dirRight;
 };

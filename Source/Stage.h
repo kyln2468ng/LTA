@@ -6,6 +6,7 @@ class Stage : public Object2D {
 public:
 	Stage();
 	~Stage();
+	void Update() override;
 	void Draw() override;
 	float ScrollX() { return scrollX; }
 
@@ -27,10 +28,15 @@ public:
 	int CheckDown(VECTOR2 pos);
 
 	int CheckUp(VECTOR2 pos);
+
+	float GetTimer() { return countTimer; }
+
 private:
 	float scrollX; // â°ÉXÉNÉçÅ[Éãó 
 
 	bool IsWall(VECTOR2 pos);
-
+	bool IsHit;
+	float countTimer;
+	float timer;
 	std::vector<std::vector<int>> map;
 };

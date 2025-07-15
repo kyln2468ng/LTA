@@ -32,6 +32,8 @@ Stage::Stage()
 	imageSize = VECTOR2(64, 64);
 	anim = 3;
 	animY = 1;
+	countTimer = 300;
+	timer = 1;
 
 	scrollX = 0;
 
@@ -49,6 +51,18 @@ Stage::Stage()
 
 Stage::~Stage()
 {
+}
+
+void Stage::Update()
+{
+	timer -= Time::DeltaTime();
+	if (timer <= 0)
+	{
+		timer = 1;
+		countTimer--;
+		//if (countTimer <= 0)
+		// gameOver
+	}
 }
 
 void Stage::Draw()
@@ -128,8 +142,13 @@ bool Stage::IsWall(VECTOR2 pos)
 	switch (map[y][x]) {
 	case 0:
 	case 9:
-	case 8:
 		return false;
+	case 8:
+	{
+		isAlive = false;
+		return true;
+	}
+
 	}
 	return true;
 }
