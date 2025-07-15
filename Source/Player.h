@@ -13,6 +13,7 @@ public:
 	void KnifeSrrow();
 	void WorkMortion();
 private:
+
 	float velocityY;
 	bool onGround;
 	bool prevPushed; // ƒiƒCƒt“Š‚°‚é”»’èˆê‰ñ‚Æ‚é‚½‚ß‚Ì•Ï”

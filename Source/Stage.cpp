@@ -3,6 +3,7 @@
 #include <vector>
 #include "Player.h"
 #include "CsvReader.h"
+#include "GameData.h"
 
 //std::vector<std::vector<int>> map = {
 //	{ 10,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -32,9 +33,9 @@ Stage::Stage()
 	imageSize = VECTOR2(64, 64);
 	anim = 3;
 	animY = 1;
-	countTimer = 300;
+	countTimer = 0;
 	timer = 1;
-	craTime = 0;
+	GameData::clearTime = 0.0f;
 
 	scrollX = 0;
 
@@ -56,14 +57,16 @@ Stage::~Stage()
 
 void Stage::Update()
 {
-	timer -= Time::DeltaTime();
-	if (timer <= 0)
-	{
-		timer = 1;
-		countTimer--;
-		//if (countTimer <= 0)
-		// gameOver
-	}
+	//timer -= Time::DeltaTime();
+	//if (timer <= 0)
+	//{
+	//	timer = 1;
+	//	countTimer--;
+	//	//if (countTimer <= 0)
+	//	// gameOver
+	//}
+	countTimer += Time::DeltaTime();
+	Player* p = FindGameObject<Player>();
 }
 
 void Stage::Draw()
@@ -147,7 +150,7 @@ bool Stage::IsWall(VECTOR2 pos)
 	case 8:
 	{
 		isAlive = false;
-		craTime = countTimer;
+		GameData::SetClearTime(countTimer);
 		return true;
 	}
 

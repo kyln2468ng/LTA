@@ -1,6 +1,7 @@
 #include "PlayScene.h"
 #include <DxLib.h>
 #include "Stage.h"
+#include "Player.h"
 
 PlayScene::PlayScene()
 {
@@ -17,14 +18,18 @@ void PlayScene::Update()
 	if (st->GetAlive() == false){
 		SceneManager::ChangeScene("RESULT");
 	}
+	Player* pl = FindGameObject<Player>();
+	if (pl->GetAlive() == false) {
+		SceneManager::ChangeScene("GAMEOVER");
+	}
 }
 
 void PlayScene::Draw()
 {
 	Stage* st = FindGameObject<Stage>();
-	int timer = st->GetTimer();
+	float timer = st->GetTimer();
 	char buffer[32];
-	snprintf(buffer, sizeof(buffer), "timer : %03d", timer);
+	snprintf(buffer, sizeof(buffer), "timer : %3.1f", timer);
 
 	//DrawString(0, 0, "PLAY SCENE", GetColor(255, 255, 255));
 	//DrawString(100, 400, "Push [L]Key To Result", GetColor(255, 255, 255));

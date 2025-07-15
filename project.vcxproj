@@ -153,6 +153,9 @@
     <ClInclude Include="Library\Time.h" />
     <ClInclude Include="Source\BootScene.h" />
     <ClInclude Include="Source\CsvReader.h" />
+    <ClInclude Include="Source\GameData.h" />
+    <ClInclude Include="Source\GameOverScene.h" />
+    <ClInclude Include="Source\global.h" />
     <ClInclude Include="Source\Knife.h" />
     <ClInclude Include="Source\Object2D.h" />
     <ClInclude Include="Source\Player.h" />
@@ -179,6 +182,8 @@
     <ClCompile Include="Library\Time.cpp" />
     <ClCompile Include="Source\BootScene.cpp" />
     <ClCompile Include="Source\CsvReader.cpp" />
+    <ClCompile Include="Source\GameData.cpp" />
+    <ClCompile Include="Source\GameOverScene.cpp" />
     <ClCompile Include="Source\Knife.cpp" />
     <ClCompile Include="Source\Object2D.cpp" />
     <ClCompile Include="Source\Player.cpp" />

@@ -9,6 +9,7 @@ namespace
 }
 
 Knife::Knife(VECTOR2 position,bool dirRight)
+	:dirRight(true)
 {
 	hImage = LoadGraph("data/image/item.png");
 	assert(hImage > 0);
@@ -55,6 +56,10 @@ void Knife::Update()
 		position.x += push;
 
 		position.x -= speed_ * dt;
+		if (position.x - 32 < 0)
+		{
+			position.x = 32;
+		}
 	}
 
 	knifeTimer_ -= dt;

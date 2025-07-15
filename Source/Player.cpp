@@ -4,6 +4,7 @@
 #include "../ImGui/imgui.h"
 #include "CsvReader.h"
 #include "Knife.h"
+#include "global.h"
 
 //static const float Gravity = 0.05f;
 //static const float JumpHeight = 64.0f * 2.0f;
@@ -11,20 +12,20 @@
 
 //タイトル「シャープワープ」
 
-namespace
-{
-	bool dir = true;
-	float mcTime = 0.3f;
-	float animTimer = 0.0f;
-	const int LeftLimit_ = 24;
-	int JumpCnt = 0;
-	const int MaxJumpCount = 2;
-	float cTimer = 3.0;
-	int pCount = 0;
-	const int MaxPushuCount = 2;
-	bool knifeTp = false;
-	bool IsFired = true;
-}
+//namespace
+//{
+//	bool dir = true;
+//	float mcTime = 0.3f;
+//	float animTimer = 0.0f;
+//	const int LeftLimit_ = 24;
+//	int JumpCnt = 0;
+//	const int MaxJumpCount = 2;
+//	float cTimer = 3.0;
+//	int pCount = 0;
+//	const int MaxPushuCount = 2;
+//	bool knifeTp = false;
+//	bool IsFired = true;
+//}
 
 Player::Player() : Player(VECTOR2(100,200))
 {
@@ -35,8 +36,7 @@ Player::Player(VECTOR2 pos)
 	JumpHeight(0),
 	moveSpeed(0),
 	knife_(0),
-	nowPushued(false),onGround(true),prevPushed(false)
-
+	nowPushued(false), onGround(true), prevPushed(false)
 {
 	// パラメーターを読む
 	CsvReader* csv = new CsvReader("data/playerParam.csv");
@@ -63,10 +63,15 @@ Player::Player(VECTOR2 pos)
 
 	position = pos;
 	velocityY = 0.0f;
+	isAlive = true;
 }
 
 Player::~Player()
 {
+	if (isAlive == false)
+	{
+		DestroyMe();
+	}
 }
 
 void Player::Update()
@@ -99,9 +104,14 @@ void Player::Update()
 		WorkMortion();
 	}
 
+	if (position.y - 32 < 0)
+	{
+		position.y = 32;
+	}
+
 	if (position.y + 31 > 1280)
 	{
-		DestroyMe();
+		isAlive = false;
 	}
 	
 	if (CheckHitKey(KEY_INPUT_N) && IsFired)
