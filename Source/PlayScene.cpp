@@ -32,8 +32,3 @@ void PlayScene::Draw()
 	//printfDx("time: %03d", tiemr);
 }
 
-
-
-//コードメモリー　 Code Memory
-//スタックメモリー Stack Memory
-//ヒープメモリー   Heap Memory

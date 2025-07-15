@@ -34,6 +34,7 @@ Stage::Stage()
 	animY = 1;
 	countTimer = 300;
 	timer = 1;
+	craTime = 0;
 
 	scrollX = 0;
 
@@ -146,6 +147,7 @@ bool Stage::IsWall(VECTOR2 pos)
 	case 8:
 	{
 		isAlive = false;
+		craTime = countTimer;
 		return true;
 	}
 
