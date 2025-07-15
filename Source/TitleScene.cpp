@@ -3,6 +3,7 @@
 
 TitleScene::TitleScene()
 {
+	backImage = LoadGraph("data/image/Title.png");
 }
 
 TitleScene::~TitleScene()
@@ -22,6 +23,10 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	DrawString(0, 0, "TITLE SCENE", GetColor(255,255,255));
-	DrawString(100, 400, "Push [P]Key To Play", GetColor(255, 255, 255));
+	DrawExtendGraph(0, 0, 1280, 720, backImage, TRUE);
+	//DrawString(0, 0, "TITLE SCENE", GetColor(255,255,255));
+	
+	SetFontSize(32);
+	DrawString(800, 550, "Push [P]Key To Play", GetColor(255, 255, 255));
+	SetFontSize(16);
 }

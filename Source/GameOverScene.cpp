@@ -20,5 +20,10 @@ void GameOverScene::Update()
 
 void GameOverScene::Draw()
 {
-	DrawString(0, 0, "game over", GetColor(255, 255, 255));
+	SetFontSize(32);
+	DrawString(300, 250, "game over", GetColor(255, 255, 255));
+
+	SetFontSize(16);
+	DrawString(100,600, "Push [T]Key To Title", GetColor(255, 255, 255));
+	DrawString(600, 600, "Push [P]Key To PLAY", GetColor(255, 255, 255));
 }

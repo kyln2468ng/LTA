@@ -10,4 +10,6 @@ public:
 	~PlayScene();
 	void Update() override;
 	void Draw() override;
+private:
+	int bImage;
 };

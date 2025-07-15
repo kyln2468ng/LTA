@@ -38,5 +38,6 @@ private:
 	bool IsHit;
 	float countTimer;
 	float timer;
+	int flagImage;
 	std::vector<std::vector<int>> map;
 };

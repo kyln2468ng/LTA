@@ -11,16 +11,16 @@ namespace
 Knife::Knife(VECTOR2 position,bool dirRight)
 	:dirRight(true)
 {
-	hImage = LoadGraph("data/image/item.png");
+	hImage = LoadGraph("data/image/knife.png");
 	assert(hImage > 0);
 
 	imageSize = VECTOR2(64, 32);
-	anim = 1;
-	animY = 1;
+	anim = 0;
+	animY = 0;
 
 	isAlive = true;
 	speed_ = 400.0f;
-	knifeTimer_ = 2.0f;
+	knifeTimer_ = 3.0f;
 }
 
 Knife::~Knife()

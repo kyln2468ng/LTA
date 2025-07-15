@@ -54,12 +54,12 @@ Player::Player(VECTOR2 pos)
 	}
 	JumpV0 = -sqrtf(2.0f * Gravity * JumpHeight);
 
-	hImage = LoadGraph("data/image/tamadot.png");
+	hImage = LoadGraph("data/image/player.png");
 	assert(hImage > 0);
 
 	imageSize = VECTOR2(64, 64);
-	anim = 0;
-	animY = 3;
+	anim = 1;
+	animY = 0;
 
 	position = pos;
 	velocityY = 0.0f;
@@ -86,7 +86,7 @@ void Player::Update()
 		push = st->CheckRight(position + VECTOR2(24, 31)); // ‰E‰º
 		position.x -= push;
 		dir = true;
-		animY = 3;
+		animY = 0;
 		WorkMortion();
 	}
 	if (CheckHitKey(KEY_INPUT_A)) {
@@ -222,11 +222,11 @@ void Player::Update()
 			st->SetScrollX(0);
 		}
 	}
-	ImGui::Begin("Player");
-	ImGui::Checkbox("onGround", &onGround);
-	ImGui::InputFloat("positionX", &position.x);
-	ImGui::InputFloat("positionY", &position.y);
-	ImGui::End();
+	//ImGui::Begin("Player");
+	//ImGui::Checkbox("onGround", &onGround);
+	//ImGui::InputFloat("positionX", &position.x);
+	//ImGui::InputFloat("positionY", &position.y);
+	//ImGui::End();
 
 	if (knife_ != nullptr && !knife_->GetAlive())
 	{
@@ -240,8 +240,8 @@ void Player::Draw()
 	Object2D::Draw();
 	Stage* st = FindGameObject<Stage>();
 	float x = position.x - st->ScrollX();
-	DrawBox(x - 24, position.y - 32, x + 24, position.y + 32,
-		GetColor(255, 0, 0), FALSE);
+	//DrawBox(x - 24, position.y - 32, x + 24, position.y + 32,
+	//	GetColor(255, 0, 0), FALSE);
 }
 
 void Player::KnifeSrrow()
@@ -251,7 +251,7 @@ void Player::KnifeSrrow()
 	{
 		knife_ = new Knife(position, dir);
 		knife_->SetPos(position);
-		knife_->SetKnifeTimer(3.0f);
+		knife_->SetKnifeTimer(2.0f);
 		knifeTp = true;
 		//cTimer = 3.0f;
 		
@@ -295,11 +295,11 @@ void Player::WorkMortion()
 	animTimer += Time::DeltaTime();
 	if (animTimer >= mcTime)
 	{
-		if (anim == 5) {
-			anim = 6;
+		if (anim == 1) {
+			anim = 0;
 		}
 		else {
-			anim = 5;
+			anim = 1;
 		}
 		animTimer = 0.0f;
 	}

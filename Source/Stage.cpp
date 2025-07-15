@@ -30,6 +30,7 @@ Stage::Stage()
 
 	hImage = LoadGraph("data/image/parts.png");
 	assert(hImage > 0);
+	flagImage = LoadGraph("data/image/flag.png");
 	imageSize = VECTOR2(64, 64);
 	anim = 3;
 	animY = 1;
@@ -82,6 +83,10 @@ void Stage::Draw()
 			}
 			else if (c == 2) {
 				DrawRectGraph(x * w - scrollX, y * h, 0 * w, 1 * h, w, h, hImage, TRUE);
+			}
+			else if (c == 8)
+			{
+				DrawRectGraph(x * w-scrollX, y * h, 0 * w, 1 * h, w, h, flagImage, TRUE);
 			}
 		}
 	}
@@ -153,7 +158,10 @@ bool Stage::IsWall(VECTOR2 pos)
 		GameData::SetClearTime(countTimer);
 		return true;
 	}
-
+	case 10:
+	{
+		return true;
+	}
 	}
 	return true;
 }

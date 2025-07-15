@@ -6,6 +6,7 @@
 PlayScene::PlayScene()
 {
 	new Stage();
+	bImage = LoadGraph("data/image/backImage.png");
 }
 
 PlayScene::~PlayScene()
@@ -26,6 +27,7 @@ void PlayScene::Update()
 
 void PlayScene::Draw()
 {
+	DrawExtendGraph(0, 0, 1280, 720, bImage, TRUE);
 	Stage* st = FindGameObject<Stage>();
 	float timer = st->GetTimer();
 	char buffer[32];
