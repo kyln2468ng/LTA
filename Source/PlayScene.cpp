@@ -27,6 +27,7 @@ void PlayScene::Update()
 
 void PlayScene::Draw()
 {
+	SetFontSize(32);
 	DrawExtendGraph(0, 0, 1280, 720, bImage, TRUE);
 	Stage* st = FindGameObject<Stage>();
 	float timer = st->GetTimer();
@@ -37,5 +38,6 @@ void PlayScene::Draw()
 	//DrawString(100, 400, "Push [L]Key To Result", GetColor(255, 255, 255));
 	DrawString(20, 0, buffer, GetColor(255, 255, 255));
 	//printfDx("time: %03d", tiemr);
+	SetFontSize(16);
 }
 

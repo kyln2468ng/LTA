@@ -34,7 +34,7 @@ Player::Player() : Player(VECTOR2(100,200))
 Player::Player(VECTOR2 pos)
 	:Gravity(0),
 	JumpHeight(0),
-	moveSpeed(0),
+	MoveSpeed(0),
 	knife_(0),
 	nowPushued(false), onGround(true), prevPushed(false)
 {
@@ -49,7 +49,7 @@ Player::Player(VECTOR2 pos)
 			JumpHeight = csv->GetFloat(i, 1);
 		}
 		else if (tag == "MoveSpeed") {
-			moveSpeed = csv->GetFloat(i, 1);
+			MoveSpeed = csv->GetFloat(i, 1);
 		}
 	}
 	JumpV0 = -sqrtf(2.0f * Gravity * JumpHeight);
@@ -80,7 +80,7 @@ void Player::Update()
 	nowPushuedS = false;
 	Stage* st = FindGameObject<Stage>();
 	if (CheckHitKey(KEY_INPUT_D)) {
-		position.x += moveSpeed;
+		position.x += MoveSpeed;
 		int push = st->CheckRight(position+VECTOR2(24,-31)); // âEè„
 		position.x -= push;
 		push = st->CheckRight(position + VECTOR2(24, 31)); // âEâ∫
@@ -90,7 +90,7 @@ void Player::Update()
 		WorkMortion();
 	}
 	if (CheckHitKey(KEY_INPUT_A)) {
-		position.x -= moveSpeed;
+		position.x -= MoveSpeed;
 		int push = st->CheckLeft(position + VECTOR2(-24, -31)); // ç∂è„
 		position.x += push;
 		push = st->CheckLeft(position + VECTOR2(-24, 31)); // ç∂â∫
