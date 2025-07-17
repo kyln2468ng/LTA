@@ -1,8 +1,13 @@
 #include "GameOverScene.h"
+#include <assert.h>
 
 GameOverScene::GameOverScene()
 {
 	bImage = LoadGraph("data/image/backImage.png");
+	se = LoadSoundMem("data/sound/gameover.mp3");
+	assert(se > 0);
+	ChangeVolumeSoundMem(128, se);
+	PlaySoundMem(se, DX_PLAYTYPE_BACK);
 }
 
 GameOverScene::~GameOverScene()

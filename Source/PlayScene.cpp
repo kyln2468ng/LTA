@@ -7,6 +7,9 @@ PlayScene::PlayScene()
 {
 	new Stage();
 	bImage = LoadGraph("data/image/backImage.png");
+	bgm = LoadSoundMem("data/sound/wonderland.mp3");
+	ChangeVolumeSoundMem(128, bgm);
+	PlaySoundMem(bgm, DX_PLAYTYPE_LOOP);
 }
 
 PlayScene::~PlayScene()
@@ -17,10 +20,12 @@ void PlayScene::Update()
 {
 	Stage* st = FindGameObject<Stage>();
 	if (st->GetAlive() == false){
+		StopSoundMem(bgm);
 		SceneManager::ChangeScene("RESULT");
 	}
 	Player* pl = FindGameObject<Player>();
 	if (pl->GetAlive() == false) {
+		StopSoundMem(bgm);
 		SceneManager::ChangeScene("GAMEOVER");
 	}
 }

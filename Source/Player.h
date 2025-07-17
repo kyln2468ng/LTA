@@ -13,6 +13,9 @@ public:
 	void KnifeSrrow();
 	void WorkMortion();
 private:
+	int jumpSE;
+	int knifeSE;
+	int warpSE;
 
 	float velocityY;
 	bool onGround;

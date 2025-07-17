@@ -4,6 +4,9 @@
 ResultScene::ResultScene()
 {
 	stareImage = LoadGraph("data/image/stare.png");
+	se = LoadSoundMem("data/sound/result.mp3");
+	ChangeVolumeSoundMem(128, se);
+	PlaySoundMem(se, DX_PLAYTYPE_BACK);
 }
 
 ResultScene::~ResultScene()

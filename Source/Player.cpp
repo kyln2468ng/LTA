@@ -57,6 +57,16 @@ Player::Player(VECTOR2 pos)
 	hImage = LoadGraph("data/image/player.png");
 	assert(hImage > 0);
 
+	jumpSE = LoadSoundMem("data/sound/jump.mp3");
+	knifeSE = LoadSoundMem("data/sound/knife.mp3");
+	warpSE = LoadSoundMem("data/sound/warp.mp3");
+	assert(jumpSE > 0);
+
+	int vol = 128;
+	ChangeVolumeSoundMem(vol, jumpSE);
+	ChangeVolumeSoundMem(vol, knifeSE);
+	ChangeVolumeSoundMem(vol, warpSE);
+
 	imageSize = VECTOR2(64, 64);
 	anim = 1;
 	animY = 0;
@@ -151,6 +161,7 @@ void Player::Update()
 	{
 		if (JumpCnt < MaxJumpCount)
 		{
+			PlaySoundMem(jumpSE, DX_PLAYTYPE_BACK);
 			velocityY = JumpV0;
 			JumpCnt++;
 		}
@@ -250,6 +261,7 @@ void Player::KnifeSrrow()
 	//static VECTOR2 prevPos = position;
 	if (nowPushued && prevPushed == false && knife_ == nullptr && IsFired)
 	{
+		PlaySoundMem(knifeSE, DX_PLAYTYPE_BACK);
 		knife_ = new Knife(position, dir);
 		knife_->SetPos(position);
 		knife_->SetKnifeTimer(2.0f);
@@ -286,6 +298,7 @@ void Player::KnifeSrrow()
 	
 	if (knife_ != nullptr && knifeTp == true) 
 	{
+		PlaySoundMem(warpSE, DX_PLAYTYPE_BACK);
 		position = knife_->GetPosition();  // ÉèÅ[Év
 		if (nFiredAir)
 		velocityY = JumpV0/2;
