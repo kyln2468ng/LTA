@@ -64,6 +64,7 @@ Player::Player(VECTOR2 pos)
 	position = pos;
 	velocityY = 0.0f;
 	isAlive = true;
+	nFiredAir = true;
 }
 
 Player::~Player()
@@ -247,7 +248,7 @@ void Player::Draw()
 void Player::KnifeSrrow()
 {
 	//static VECTOR2 prevPos = position;
-	if (nowPushued && prevPushed == false && knife_ == nullptr)
+	if (nowPushued && prevPushed == false && knife_ == nullptr && IsFired)
 	{
 		knife_ = new Knife(position, dir);
 		knife_->SetPos(position);
@@ -260,7 +261,13 @@ void Player::KnifeSrrow()
 			knife_->SetDirR(true);
 		}
 		else
-			knife_->SetDirR(false);		
+			knife_->SetDirR(false);	
+
+		if (onGround)
+			nFiredAir = false;
+		else
+			nFiredAir = true;
+
 		return;
 	}
 
@@ -277,9 +284,11 @@ void Player::KnifeSrrow()
 	//	knife_ = nullptr;
 	//}
 	
-	if (knife_ != nullptr && knifeTp == true && IsFired) //&& cTimer > 0.0f)
+	if (knife_ != nullptr && knifeTp == true) 
 	{
 		position = knife_->GetPosition();  // ワープ
+		if (nFiredAir)
+		velocityY = JumpV0/2;
 		knife_->SetKnifeTimer(0);          // タイマー切る（無効化）
 		knife_->DestroyMe();
 		knife_ = nullptr;

@@ -12,4 +12,5 @@ namespace
 	const int MaxPushuCount = 2;
 	bool knifeTp = false;
 	bool IsFired = true;
+	float coolTime = 0.1f;
 }

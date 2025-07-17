@@ -20,6 +20,7 @@ private:
 	bool nowPushued; // ナイフ投げる判定一回とるための変数
 	bool prevPushuedS; // ジャンプの判定とるための変数
 	bool nowPushuedS; // ジャンプの判定とるための変数
+	bool nFiredAir;
 
 	float Gravity;
 	float JumpHeight;
