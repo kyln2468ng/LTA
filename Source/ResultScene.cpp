@@ -29,7 +29,7 @@ void ResultScene::Draw()
 	int h = 720 / 4;
 
 	SetFontSize(64);
-	int result; //GOOD Å® GREAT Å® EXCELLENT
+	int result; 
 	if (timer <= 60.0f)
 	{
 		result = 3;

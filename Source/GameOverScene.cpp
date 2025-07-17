@@ -2,6 +2,7 @@
 
 GameOverScene::GameOverScene()
 {
+	bImage = LoadGraph("data/image/backImage.png");
 }
 
 GameOverScene::~GameOverScene()
@@ -20,8 +21,9 @@ void GameOverScene::Update()
 
 void GameOverScene::Draw()
 {
-	SetFontSize(32);
-	DrawString(300, 250, "game over", GetColor(255, 255, 255));
+	DrawExtendGraph(0, 0, 1280, 720, bImage, TRUE);
+	SetFontSize(128);
+	DrawString(1280/4, 250, "GAME OVER", GetColor(180, 30, 30));
 
 	SetFontSize(16);
 	DrawString(100,600, "Push [T]Key To Title", GetColor(255, 255, 255));

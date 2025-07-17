@@ -16,7 +16,7 @@ PlayScene::~PlayScene()
 void PlayScene::Update()
 {
 	Stage* st = FindGameObject<Stage>();
-	if (st->GetAlive() == false || CheckHitKey(KEY_INPUT_R)){
+	if (st->GetAlive() == false){
 		SceneManager::ChangeScene("RESULT");
 	}
 	Player* pl = FindGameObject<Player>();
