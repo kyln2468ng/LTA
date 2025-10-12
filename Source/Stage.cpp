@@ -17,7 +17,7 @@
 Stage::Stage()
 {
 	// ステージデータの読み込み
-	CsvReader* csv = new CsvReader("data/map/stage02.csv");
+	CsvReader* csv = new CsvReader("data/map/stage01.csv");
 	for (int line = 0; line < csv->GetLines(); line++) {
 		std::vector<int> mapLine;
 		for (int column = 0; column < csv->GetColumns(line); column++) {
