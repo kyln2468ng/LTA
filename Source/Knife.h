@@ -4,16 +4,16 @@
 class Knife : public Object2D
 {
 public:
-	Knife(VECTOR2 position,bool dirRight);
+	Knife();
+	Knife(VECTOR2 pos,bool pDir);
 	~Knife();
 	void Update() override;
 	void Draw() override;
-	void SetKnifeTimer(float nTime) { knifeTimer_ = nTime; }
-	void SetPos(VECTOR2 pos) { position = pos; }
-	void SetDirR(bool dir) { dirRight = dir; }
+	//void SetKnifeTimer(float nTime) { knifeTimer_ = nTime; }
+	//void SetDirR(bool dir) { dirRight = dir; }
 	//void GetTimer() { return knifeTimer_; }
 private:
 	float knifeTimer_;
 	float speed_;
-	bool dirRight;
+	bool dir; //ƒiƒCƒt‚ÌŒü‚« true
 };

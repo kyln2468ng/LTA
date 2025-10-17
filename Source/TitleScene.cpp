@@ -15,6 +15,10 @@ void TitleScene::Update()
 	if (CheckHitKey(KEY_INPUT_SPACE)) {
 		SceneManager::ChangeScene("OPERATION");
 	}
+	if (CheckHitKey(KEY_INPUT_P))
+	{
+		SceneManager::ChangeScene("PLAY");
+	}
 	if (CheckHitKey(KEY_INPUT_ESCAPE)) {
 		SceneManager::Exit();
 	}

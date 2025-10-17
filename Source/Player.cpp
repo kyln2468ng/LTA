@@ -263,17 +263,7 @@ void Player::KnifeSrrow()
 	{
 		PlaySoundMem(knifeSE, DX_PLAYTYPE_BACK);
 		knife_ = new Knife(position, dir);
-		knife_->SetPos(position);
-		knife_->SetKnifeTimer(2.0f);
 		knifeTp = true;
-		//cTimer = 3.0f;
-		
-		if (dir)
-		{
-			knife_->SetDirR(true);
-		}
-		else
-			knife_->SetDirR(false);	
 
 		if (onGround)
 			nFiredAir = false;
@@ -283,26 +273,12 @@ void Player::KnifeSrrow()
 		return;
 	}
 
-	//if (knife_ != nullptr)
-	//{
-	//	cTimer -= Time::DeltaTime();
-	//}
-	//else
-	//	cTimer = 0;
-
-	//if (knife_ != nullptr && !knife_->GetAlive())
-	//{
-	//	knife_->DestroyMe();
-	//	knife_ = nullptr;
-	//}
-	
 	if (knife_ != nullptr && knifeTp == true) 
 	{
 		PlaySoundMem(warpSE, DX_PLAYTYPE_BACK);
 		position = knife_->GetPosition();  // ワープ
 		if (nFiredAir)
 		velocityY = JumpV0/2;
-		knife_->SetKnifeTimer(0);          // タイマー切る（無効化）
 		knife_->DestroyMe();
 		knife_ = nullptr;
 		knifeTp = false;

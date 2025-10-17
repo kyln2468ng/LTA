@@ -8,8 +8,12 @@ namespace
 	int push = 0;
 }
 
-Knife::Knife(VECTOR2 position,bool dirRight)
-	:dirRight(true)
+Knife::Knife()
+{
+}
+
+Knife::Knife(VECTOR2 pos,bool pDir)
+	:dir(pDir)
 {
 	hImage = LoadGraph("data/image/knife.png");
 	assert(hImage > 0);
@@ -18,6 +22,7 @@ Knife::Knife(VECTOR2 position,bool dirRight)
 	anim = 0;
 	animY = 0;
 
+	position = pos;
 	isAlive = true;
 	speed_ = 400.0f;
 	knifeTimer_ = 3.0f;
@@ -37,8 +42,9 @@ void Knife::Update()
 	float dt = Time::DeltaTime();
 	Stage* st = FindGameObject<Stage>();
 
-	if (dirRight)
+	if (dir)
 	{
+		animY = 0;
 		push = st->CheckRight(position + VECTOR2(32, -16));
 		position.x -= push;
 		push = st->CheckRight(position + VECTOR2(32, 16));
@@ -50,6 +56,7 @@ void Knife::Update()
 	}
 	else
 	{
+		animY = 1;
 		push = st->CheckLeft(position + VECTOR2(-32, -16));
 		position.x += push;
 		push = st->CheckLeft(position + VECTOR2(-32, 16));
@@ -93,8 +100,6 @@ void Knife::Update()
 	//		position.y -= push - 1;
 	//	}
 	//}
-
-
 }
 
 void Knife::Draw()
