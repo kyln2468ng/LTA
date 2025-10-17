@@ -277,8 +277,10 @@ void Player::KnifeSrrow()
 	{
 		PlaySoundMem(warpSE, DX_PLAYTYPE_BACK);
 		position = knife_->GetPosition();  // ƒ[ƒv
+
 		if (nFiredAir)
-		velocityY = JumpV0/2;
+			velocityY = JumpV0/2;
+		
 		knife_->DestroyMe();
 		knife_ = nullptr;
 		knifeTp = false;

@@ -76,30 +76,6 @@ void Knife::Update()
 		
 	}
 
-	//if (position.y < 0.0f) {
-	//	int push = st->CheckUp(position + VECTOR2(-24, -31)); // ¶‰º
-	//	if (push > 0) {
-	//		//position.y = 0.0f;
-	//		position.y += push;
-	//	}
-	//	push = st->CheckUp(position + VECTOR2(24, -31)); // ‰E‰º
-	//	if (push > 0) {
-	//		//position.y = 0.0f;
-	//		position.y += push;
-	//	}
-	//}
-	//else {
-	//	int push = st->CheckDown(position + VECTOR2(-24, 31 + 1)); // ¶‰º
-	//	if (push > 0) {
-	//		//position.y = 0.0f;
-	//		position.y -= push - 1;
-	//	}
-	//	push = st->CheckDown(position + VECTOR2(24, 31 + 1)); // ‰E‰º
-	//	if (push > 0) {
-	//		//position.y = 0.0f;
-	//		position.y -= push - 1;
-	//	}
-	//}
 }
 
 void Knife::Draw()

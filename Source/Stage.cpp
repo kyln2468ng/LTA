@@ -82,7 +82,7 @@ void Stage::Draw()
 				DrawRectGraph(x * w - scrollX, y * h, 3 * w, 1 * h, w, h, hImage, TRUE);
 			}
 			else if (c == 2) {
-				DrawRectGraph(x * w - scrollX, y * h, 0 * w, 1 * h, w, h, hImage, TRUE);
+				DrawRectGraph(x * w - scrollX, y * h, 3 * w, 0 * h, w, h, hImage, TRUE);
 			}
 			else if (c == 8)
 			{
@@ -150,6 +150,10 @@ bool Stage::IsWall(VECTOR2 pos)
 	// チップの番号を見て、壁かどうか確定する
 	switch (map[y][x]) {
 	case 0:
+	case 2:
+	{
+		return false;
+	}
 	case 9:
 		return false;
 	case 8:
