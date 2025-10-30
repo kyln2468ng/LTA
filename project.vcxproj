@@ -164,6 +164,7 @@
     <ClInclude Include="Source\Screen.h" />
     <ClInclude Include="Source\PlayScene.h" />
     <ClInclude Include="Source\SceneFactory.h" />
+    <ClInclude Include="Source\SpawnManager.h" />
     <ClInclude Include="Source\Stage.h" />
     <ClInclude Include="Source\TitleScene.h" />
   </ItemGroup>
@@ -192,6 +193,7 @@
     <ClCompile Include="Source\PlayScene.cpp" />
     <ClCompile Include="Source\ResultScene.cpp" />
     <ClCompile Include="Source\SceneFactory.cpp" />
+    <ClCompile Include="Source\SpawnManager.cpp" />
     <ClCompile Include="Source\Stage.cpp" />
     <ClCompile Include="Source\TitleScene.cpp" />
   </ItemGroup>

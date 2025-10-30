@@ -40,4 +40,5 @@ private:
 	float timer;
 	int flagImage;
 	std::vector<std::vector<int>> map;
+	bool nIsAlive;
 };

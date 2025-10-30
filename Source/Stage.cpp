@@ -37,6 +37,7 @@ Stage::Stage()
 	countTimer = 0;
 	timer = 1;
 	GameData::clearTime = 0.0f;
+	nIsAlive = true;
 
 	scrollX = 0;
 
@@ -150,8 +151,14 @@ bool Stage::IsWall(VECTOR2 pos)
 	// チップの番号を見て、オブジェクトかどうか確定する
 	switch (map[y][x]) {
 	case 0:
-	case 2:
+	case 2: //ナイフの変わり
 	{
+		nIsAlive = false;
+		if (nIsAlive == false)
+		{
+			//スポーンクラスをファインドオブジェクトで呼ぶ
+			//スポーンクラスのリスポーン関数に登録
+		}
 		return false;
 	}
 	case 9:

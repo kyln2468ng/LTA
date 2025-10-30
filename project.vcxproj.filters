@@ -68,6 +68,10 @@
     <ClCompile Include="Source\ResultScene.cpp">
       <Filter>ResultScene</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameData.cpp" />
+    <ClCompile Include="Source\GameOverScene.cpp" />
+    <ClCompile Include="Source\OperationScene.cpp" />
+    <ClCompile Include="Source\SpawnManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -146,6 +150,13 @@
     </ClInclude>
     <ClInclude Include="Source\ResultScene.h">
       <Filter>ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameData.h" />
+    <ClInclude Include="Source\GameOverScene.h" />
+    <ClInclude Include="Source\global.h" />
+    <ClInclude Include="Source\OperationScene.h" />
+    <ClInclude Include="Source\SpawnManager.h">
+      <Filter>PlayScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
