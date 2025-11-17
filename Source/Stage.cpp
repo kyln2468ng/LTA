@@ -70,6 +70,8 @@ void Stage::Update()
 	//}
 	countTimer += Time::DeltaTime();
 	Player* p = FindGameObject<Player>();
+	SpawnManager* spm = FindGameObject<SpawnManager>();
+	
 }
 
 void Stage::Draw()
