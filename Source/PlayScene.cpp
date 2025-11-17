@@ -2,9 +2,11 @@
 #include <DxLib.h>
 #include "Stage.h"
 #include "Player.h"
+#include "SpawnManager.h"
 
 PlayScene::PlayScene()
 {
+	new SpawnManager();
 	new Stage();
 	bImage = LoadGraph("data/image/backImage.png");
 	bgm = LoadSoundMem("data/sound/wonderland.mp3");
@@ -18,6 +20,8 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
+	/*SpawnManager* spm = FindGameObject<SpawnManager>();
+	spm->Update();*/
 	Stage* st = FindGameObject<Stage>();
 	if (st->GetAlive() == false){
 		StopSoundMem(bgm);
@@ -28,6 +32,7 @@ void PlayScene::Update()
 		StopSoundMem(bgm);
 		SceneManager::ChangeScene("GAMEOVER");
 	}
+
 }
 
 void PlayScene::Draw()

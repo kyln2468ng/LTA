@@ -26,6 +26,10 @@ inline VECTOR2 operator +(VECTOR2 a, VECTOR2 b) {
 	return r;
 }
 
+inline VECTOR2 operator /(VECTOR2 a, int b) {
+	return VECTOR2(a.x / (float)b, a.y / (float)b);
+}
+
 inline float VSize(VECTOR2 v) {
 	return sqrtf(v.x * v.x + v.y * v.y);
 }
@@ -37,6 +41,7 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 	VECTOR2 GetPosition() { return position; }
+	void SetPosition(const VECTOR2& pos) { position = pos; }
 	void SetAlive(bool alive) { isAlive = alive; }
 	bool GetAlive() const { return isAlive; }
 
