@@ -148,6 +148,7 @@ bool Stage::IsWall(VECTOR2 pos)
 	if (x < 0 || x >= map[y].size()) {
 		return false;
 	}
+
 	// チップの番号を見て、オブジェクトかどうか確定する
 	switch (map[y][x]) {
 	case 0:
