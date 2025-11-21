@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "CsvReader.h"
 #include "GameData.h"
+#include "SpawnManager.h"
 
 //std::vector<std::vector<int>> map = {
 //	{ 10,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -69,6 +70,8 @@ void Stage::Update()
 	//}
 	countTimer += Time::DeltaTime();
 	Player* p = FindGameObject<Player>();
+	SpawnManager* spm = FindGameObject<SpawnManager>();
+	
 }
 
 void Stage::Draw()
@@ -159,6 +162,9 @@ bool Stage::IsWall(VECTOR2 pos)
 		{
 			//スポーンクラスをファインドオブジェクトで呼ぶ
 			//スポーンクラスのリスポーン関数に登録
+			SpawnManager* spm = FindGameObject<SpawnManager>();
+			spm->AddSpawnPoint(pos, map[y][x],nIsAlive);
+			map[y][x] = 0;
 		}
 		return false;
 	}

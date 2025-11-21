@@ -71,7 +71,9 @@
     <ClCompile Include="Source\GameData.cpp" />
     <ClCompile Include="Source\GameOverScene.cpp" />
     <ClCompile Include="Source\OperationScene.cpp" />
-    <ClCompile Include="Source\SpawnManager.cpp" />
+    <ClCompile Include="Source\SpawnManager.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />

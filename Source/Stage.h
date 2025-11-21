@@ -31,6 +31,11 @@ public:
 
 	float GetTimer() { return countTimer; }
 
+	void SetTile(int x, int y, int tileID)
+	{
+		map[y][x] = tileID;
+	}
+
 private:
 	float scrollX; // ‰¡ƒXƒNƒ[ƒ‹—Ê
 

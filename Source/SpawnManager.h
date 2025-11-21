@@ -1,16 +1,27 @@
 #pragma once
-#include "../Library/GameObject.h"
+#include<vector>
 #include "Object2D.h"
 
-class SpawnManager : public GameObject
-{
-public:
-	SpawnManager() = default;
-	virtual ~SpawnManager() = default;
-	virtual void Update() override = 0;
-	virtual void Draw() override = 0;
+class Stage;
 
-	// 各種登録・リスポーン管理に共通で使う関数
-	virtual void RegisterRespawn(VECTOR2 pos, int handle) = 0;
+struct SpawnPoint {
+    VECTOR2 pos_;
+    int tileID_;
+    bool obIsAlive_;
+};
+
+class SpawnManager :public Object2D {
+public:
+    SpawnManager();
+    ~SpawnManager();
+    void Update() override;
+    void AddSpawnPoint(const VECTOR2& pos, int tileID, bool objectAlive);
+    void SetSpawnPoints(const std::vector<VECTOR2>& pts, int tileID, bool objectAlive);
+    
+    void Spawn();
+
 private:
+    float timer_;
+    float spawnInterval_;
+    std::vector<SpawnPoint> spawnPoints_;
 };
