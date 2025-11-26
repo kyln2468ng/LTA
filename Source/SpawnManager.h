@@ -15,9 +15,8 @@ public:
     SpawnManager();
     ~SpawnManager();
     void Update() override;
-    void AddSpawnPoint(const VECTOR2& pos, int tileID, bool objectAlive);
-    void SetSpawnPoints(const std::vector<VECTOR2>& pts, int tileID, bool objectAlive);
-    
+    void AddSpawnPoint(const VECTOR2& pos, int tileID);
+    void SetSpawnPoints(const std::vector<VECTOR2>& pts, int tileID);
     void Spawn();
 
 private:

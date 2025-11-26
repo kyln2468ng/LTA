@@ -38,7 +38,6 @@ Stage::Stage()
 	countTimer = 0;
 	timer = 1;
 	GameData::clearTime = 0.0f;
-	nIsAlive = true;
 
 	scrollX = 0;
 
@@ -52,6 +51,8 @@ Stage::Stage()
 			}
 		}
 	}
+
+	new SpawnManager();
 }
 
 Stage::~Stage()
@@ -71,7 +72,9 @@ void Stage::Update()
 	countTimer += Time::DeltaTime();
 	Player* p = FindGameObject<Player>();
 	SpawnManager* spm = FindGameObject<SpawnManager>();
-	
+	if (spm) {
+		spm->Update();
+	}
 }
 
 void Stage::Draw()
@@ -140,6 +143,11 @@ int Stage::CheckUp(VECTOR2 pos)
 	return imageSize.y - dy;
 }
 
+void Stage::SetTile(int x, int y, int tileID)
+{
+	map[y][x] = tileID;
+}
+
 bool Stage::IsWall(VECTOR2 pos)
 {
 	// チップの場所を特定する
@@ -157,13 +165,9 @@ bool Stage::IsWall(VECTOR2 pos)
 	case 0:
 	case 2: //ナイフの変わり
 	{
-		nIsAlive = false;
-		if (nIsAlive == false)
-		{
-			//スポーンクラスをファインドオブジェクトで呼ぶ
-			//スポーンクラスのリスポーン関数に登録
+		if (map[y][x] == 2) { 
 			SpawnManager* spm = FindGameObject<SpawnManager>();
-			spm->AddSpawnPoint(pos, map[y][x],nIsAlive);
+			spm->AddSpawnPoint(pos, 2);
 			map[y][x] = 0;
 		}
 		return false;

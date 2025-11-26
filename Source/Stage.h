@@ -31,10 +31,7 @@ public:
 
 	float GetTimer() { return countTimer; }
 
-	void SetTile(int x, int y, int tileID)
-	{
-		map[y][x] = tileID;
-	}
+	void SetTile(int x, int y, int tileID);
 
 private:
 	float scrollX; // ‰¡ƒXƒNƒ[ƒ‹—Ê
@@ -45,5 +42,4 @@ private:
 	float timer;
 	int flagImage;
 	std::vector<std::vector<int>> map;
-	bool nIsAlive;
 };

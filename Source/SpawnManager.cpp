@@ -4,19 +4,25 @@
 SpawnManager::SpawnManager()
 {
     timer_ = 0.0f;
-    spawnInterval_ = 5.0f;
+    spawnInterval_ = 10.0f;
 }
 
 SpawnManager::~SpawnManager()
 {
 }
 
-void SpawnManager::AddSpawnPoint(const VECTOR2& pos, int tileID, bool objectAlive)
+void SpawnManager::AddSpawnPoint(const VECTOR2& pos, int tileID)
 {
+    for (auto& sp : spawnPoints_) {
+        if (sp.pos_.x == pos.x && sp.pos_.y == pos.y) {
+            return; // Ç‡Ç§ìoò^çœÇ›Ç»ÇÁñ≥éã
+        }
+    }
+
     spawnPoints_.push_back({ pos, tileID });
 }
 
-void SpawnManager::SetSpawnPoints(const std::vector<VECTOR2>& pts, int tileID, bool objectAlive)
+void SpawnManager::SetSpawnPoints(const std::vector<VECTOR2>& pts, int tileID)
 {
     spawnPoints_.clear();
     for (auto& p : pts)
