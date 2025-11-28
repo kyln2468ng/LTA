@@ -8,6 +8,7 @@ TitleScene::TitleScene()
 
 TitleScene::~TitleScene()
 {
+	DeleteGraph(backImage);
 }
 
 void TitleScene::Update()

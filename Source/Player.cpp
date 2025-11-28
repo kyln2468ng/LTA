@@ -36,7 +36,7 @@ Player::Player(VECTOR2 pos)
 	:Gravity(0),
 	JumpHeight(0),
 	MoveSpeed(0),
-	knife_(0),knifeCount_(0),
+	knife_(0),
 	nowPushued(false), onGround(true), prevPushed(false)
 {
 	// パラメーターを読む
@@ -80,10 +80,10 @@ Player::Player(VECTOR2 pos)
 
 Player::~Player()
 {
-	if (isAlive == false)
-	{
-		DestroyMe();
-	}
+	DeleteGraph(hImage);
+	DeleteSoundMem(jumpSE);
+	DeleteSoundMem(knifeSE);
+	DeleteSoundMem(warpSE);
 }
 
 void Player::Update()
@@ -91,6 +91,9 @@ void Player::Update()
 	nowPushued = false;
 	nowPushuedS = false;
 	Stage* st = FindGameObject<Stage>();
+	//if(st == nullptr) {
+	//	this->DestroyMe();
+	//}
 	if (CheckHitKey(KEY_INPUT_D)) {
 		position.x += MoveSpeed;
 		int push = st->CheckRight(position+VECTOR2(24,-31)); // 右上
@@ -124,17 +127,18 @@ void Player::Update()
 	if (position.y + 31 > 1280)
 	{
 		isAlive = false;
+		DestroyMe();
 	}
 	
+	int kCount = st->GetKnifeCount();
 	if (CheckHitKey(KEY_INPUT_N) && IsFired)
 	{
 		nowPushued = true;
-		GetKnifeCount();
 		//KnifeSrrow();
 	}
 
 	// 1回押し判定で呼ぶ（前フレームと比較）
-	if (nowPushued && !prevPushed && knifeCount_ != 0)
+	if (nowPushued && !prevPushed && kCount != 0)
 	{
 		KnifeSrrow();
 	}
@@ -219,16 +223,28 @@ void Player::Update()
 			float scrollLineLeft = st->ScrollX(); // 背景の左スクロール位置
 			float scrollLineRight = st->ScrollX() + Screen::WIDTH;
 
+			bool pushed = false;
 			if (playerLeft < scrollLineLeft) {
 
 				// 差分
 				float diff = scrollLineLeft - playerLeft;
 				position.x += diff;
+				pushed = true;
 			}
 
 			if (playerRight > scrollLineRight) {
 				float diff = playerRight - scrollLineRight;
 				position.x -= diff;
+			}
+
+			if (pushed) {
+				int l1 = st->CheckLeft(position + VECTOR2(24, -31));
+				int l2 = st->CheckLeft(position + VECTOR2(24, 31));
+
+				if (l1 > 0 || l2 > 0) {
+					DestroyMe();
+					return;
+				}
 			}
 			
 		}
@@ -293,7 +309,8 @@ void Player::KnifeSrrow()
 	{
 		PlaySoundMem(warpSE, DX_PLAYTYPE_BACK);
 		position = knife_->GetPosition();  // ワープ
-		knifeCount_--;
+		Stage* st = FindGameObject<Stage>();
+		st->SadKnife();
 
 		if (nFiredAir)
 			velocityY = JumpV0/2;
@@ -305,11 +322,6 @@ void Player::KnifeSrrow()
 		return;
 	}
 
-}
-
-void Player::AddKnife()
-{
-	knifeCount_++;
 }
 
 void Player::WorkMortion()

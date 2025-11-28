@@ -59,6 +59,8 @@ Stage::Stage()
 
 Stage::~Stage()
 {
+	DeleteGraph(hImage);
+	DeleteGraph(flagImage);
 }
 
 void Stage::Update()
@@ -73,20 +75,25 @@ void Stage::Update()
 		scrollX += forcedScrollSpeed * Time::DeltaTime();
 		if (scrollX < 0.0f) scrollX = 0.0f;
 	}
+
+	Player* p = FindGameObject<Player>();
+	if (!p) {
+		this->DestroyMe();
+		spm->DestroyMe();
+	}
 }
 
 void Stage::Draw()
 {
-	Player* p = FindGameObject<Player>();
-	int knifeCount = p->GetKnifeCount();
-
 	int w = imageSize.x;
 	int h = imageSize.y;
 
 	DrawRectExtendGraph(30, 30, 40 + w / 2, 40 + h / 2, 3 * w, 0 * h, w, h, hImage, TRUE);
+
 	SetFontSize(32);
-	DrawFormatString(100, 30, GetColor(255, 255, 255), "X %d",p->GetKnifeCount());;
+	DrawFormatString(100, 30, GetColor(255, 255, 255), "X %d", GetKnifeCount());;
 	SetFontSize(16);
+
 	for (int y = 0; y < map.size(); y++) {
 		for (int x = 0; x < map[y].size(); x++) {
 			int c = map[y][x];
@@ -158,6 +165,7 @@ bool Stage::IsWall(VECTOR2 pos)
 	// ƒ`ƒbƒv‚ÌêŠ‚ð“Á’è‚·‚é
 	int x = pos.x / imageSize.x;
 	int y = pos.y / imageSize.y;
+
 	if (y < 0 || y >= map.size()) {
 		return false;
 	}
@@ -175,7 +183,7 @@ bool Stage::IsWall(VECTOR2 pos)
 			spm->AddSpawnPoint(pos, 2);
 			map[y][x] = 0;
 			Player* p = FindGameObject<Player>();
-			p->AddKnife();
+			AddKnife();
 		}
 		return false;
 	}

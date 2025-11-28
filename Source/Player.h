@@ -11,15 +11,11 @@ public:
 	void Update() override;
 	void Draw() override;
 	void KnifeSrrow();
-	void AddKnife();
-	int GetKnifeCount() const { return knifeCount_; }
-
 	void WorkMortion();
 private:
 	int jumpSE;
 	int knifeSE;
 	int warpSE;
-	int knifeCount_;
 
 	float velocityY;
 	bool onGround;

@@ -12,6 +12,8 @@ GameOverScene::GameOverScene()
 
 GameOverScene::~GameOverScene()
 {
+	DeleteGraph(bImage);
+	DeleteSoundMem(se);
 }
 
 void GameOverScene::Update()

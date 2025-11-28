@@ -42,6 +42,10 @@ public:
 
 	void SetTile(int x, int y, int tileID);
 
+	void AddKnife() { knifeCount_++; }
+	void SadKnife() { knifeCount_--; }
+	int GetKnifeCount() const { return knifeCount_; }
+
 private:
 	float scrollX; // 横スクロール量
 	// 強制スクロール速度（ピクセル/秒）。0.0f で無効。
@@ -52,5 +56,6 @@ private:
 	float countTimer;
 	float timer;
 	int flagImage;
+	int knifeCount_;
 	std::vector<std::vector<int>> map;
 };

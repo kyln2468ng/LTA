@@ -11,6 +11,8 @@ ResultScene::ResultScene()
 
 ResultScene::~ResultScene()
 {
+	DeleteGraph(stareImage);
+	DeleteSoundMem(se);
 }
 
 void ResultScene::Update()
