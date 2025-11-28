@@ -40,6 +40,8 @@ Stage::Stage()
 	GameData::clearTime = 0.0f;
 
 	scrollX = 0;
+	// 自動スクロールを有効化（ピクセル/秒）。必要に応じて値を調整。
+	forcedScrollSpeed = 120.0f;
 
 	for (int y = 0; y < map.size(); y++) {
 		for (int x = 0; x < map[y].size(); x++) {
@@ -65,6 +67,11 @@ void Stage::Update()
 	SpawnManager* spm = FindGameObject<SpawnManager>();
 	if (spm) {
 		spm->Update();
+	}
+
+	if (forcedScrollSpeed != 0.0f) {
+		scrollX += forcedScrollSpeed * Time::DeltaTime();
+		if (scrollX < 0.0f) scrollX = 0.0f;
 	}
 }
 

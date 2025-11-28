@@ -17,6 +17,15 @@ public:
 	void SetScrollX(int sc) { scrollX = sc; }
 
 	/// <summary>
+/// 強制スクロール速度を設定する（ピクセル/秒）。0.0f で無効化。
+/// 正の値で右方向へスクロール。
+/// </summary>
+	void SetForcedScrollSpeed(float speed) { forcedScrollSpeed = speed; }
+
+	/// 強制スクロール速度を取得
+	float ForcedScrollSpeed() const { return forcedScrollSpeed; }
+
+	/// <summary>
 	/// 指定した点が当たっているか調べる
 	/// </summary>
 	/// <param name="pos">調べる点</param>
@@ -35,6 +44,8 @@ public:
 
 private:
 	float scrollX; // 横スクロール量
+	// 強制スクロール速度（ピクセル/秒）。0.0f で無効。
+	float forcedScrollSpeed;
 
 	bool IsWall(VECTOR2 pos);
 	bool IsHit;

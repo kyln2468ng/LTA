@@ -5,6 +5,7 @@
 #include "CsvReader.h"
 #include "Knife.h"
 #include "global.h"
+#include "Screen.h"
 
 //static const float Gravity = 0.05f;
 //static const float JumpHeight = 64.0f * 2.0f;
@@ -210,20 +211,43 @@ void Player::Update()
 	// プレイヤーの表示位置が、600よりも右だったら、右にスクロールする
 	// プレイヤーの表示位置が、400よりも左だったら、左にスクロール
 	if (st != nullptr) {
-		float drawX = position.x - st->ScrollX(); // これが表示座標
-		static const int RightLimit = 600;
-		static const int LeftLimit = 400;
-		if (drawX > RightLimit) {
-			st->SetScrollX(position.x - RightLimit);
-			position.x = RightLimit + st->ScrollX();
+		// 強制スクロール中
+		if (st->ForcedScrollSpeed() > 0.0f) {
+			float playerLeft = position.x - imageSize.x / 2;
+			float playerRight = position.x + imageSize.x / 2;
+			
+			float scrollLineLeft = st->ScrollX(); // 背景の左スクロール位置
+			float scrollLineRight = st->ScrollX() + Screen::WIDTH;
+
+			if (playerLeft < scrollLineLeft) {
+
+				// 差分
+				float diff = scrollLineLeft - playerLeft;
+				position.x += diff;
+			}
+
+			if (playerRight > scrollLineRight) {
+				float diff = playerRight - scrollLineRight;
+				position.x -= diff;
+			}
+			
 		}
-		else if (drawX < LeftLimit) {
-			st->SetScrollX(position.x - LeftLimit);
-			position.x = LeftLimit + st->ScrollX();
-		}
-		if (position.x < LeftLimit)
-		{
-			st->SetScrollX(0);
+		else {
+			float drawX = position.x - st->ScrollX(); // これが表示座標
+			static const int RightLimit = 600;
+			static const int LeftLimit = 400;
+			if (drawX > RightLimit) {
+				st->SetScrollX(position.x - RightLimit);
+				position.x = RightLimit + st->ScrollX();
+			}
+			else if (drawX < LeftLimit) {
+				st->SetScrollX(position.x - LeftLimit);
+				position.x = LeftLimit + st->ScrollX();
+			}
+			if (position.x < LeftLimit)
+			{
+				st->SetScrollX(0);
+			}
 		}
 	}
 	//ImGui::Begin("Player");
