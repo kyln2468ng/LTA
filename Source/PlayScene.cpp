@@ -23,7 +23,7 @@ void PlayScene::Update()
 	Stage* st = FindGameObject<Stage>();
 	Player* pl = FindGameObject<Player>();
 
-	if (!st){
+	if (!st->GetAlive()) {
 		StopSoundMem(bgm);
 		SceneManager::ChangeScene("RESULT");
 		return;

@@ -18,7 +18,7 @@
 Stage::Stage()
 {
 	// ステージデータの読み込み
-	CsvReader* csv = new CsvReader("data/map/stage01.csv");
+	CsvReader* csv = new CsvReader("data/map/stage02.csv");
 	for (int line = 0; line < csv->GetLines(); line++) {
 		std::vector<int> mapLine;
 		for (int column = 0; column < csv->GetColumns(line); column++) {
@@ -41,7 +41,7 @@ Stage::Stage()
 
 	scrollX = 0;
 	// 自動スクロールを有効化（ピクセル/秒）。必要に応じて値を調整。
-	forcedScrollSpeed = 120.0f;
+	forcedScrollSpeed = 120.0f * GameData::setScroll_;
 
 	for (int y = 0; y < map.size(); y++) {
 		for (int x = 0; x < map[y].size(); x++) {
@@ -186,6 +186,7 @@ bool Stage::IsWall(VECTOR2 pos)
 			AddKnife();
 		}
 		return false;
+
 	}
 	case 9:
 		return false;

@@ -10,4 +10,6 @@ public:
 	void Draw() override;
 private:
 	int opeImage;
+	bool nowP;
+	bool preP;
 };
