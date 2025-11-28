@@ -61,16 +61,7 @@ Stage::~Stage()
 
 void Stage::Update()
 {
-	//timer -= Time::DeltaTime();
-	//if (timer <= 0)
-	//{
-	//	timer = 1;
-	//	countTimer--;
-	//	//if (countTimer <= 0)
-	//	// gameOver
-	//}
 	countTimer += Time::DeltaTime();
-	Player* p = FindGameObject<Player>();
 	SpawnManager* spm = FindGameObject<SpawnManager>();
 	if (spm) {
 		spm->Update();
@@ -79,9 +70,16 @@ void Stage::Update()
 
 void Stage::Draw()
 {
+	Player* p = FindGameObject<Player>();
+	int knifeCount = p->GetKnifeCount();
+
 	int w = imageSize.x;
 	int h = imageSize.y;
 
+	DrawRectExtendGraph(30, 30, 40 + w / 2, 40 + h / 2, 3 * w, 0 * h, w, h, hImage, TRUE);
+	SetFontSize(32);
+	DrawFormatString(100, 30, GetColor(255, 255, 255), "X %d",p->GetKnifeCount());;
+	SetFontSize(16);
 	for (int y = 0; y < map.size(); y++) {
 		for (int x = 0; x < map[y].size(); x++) {
 			int c = map[y][x];
@@ -169,6 +167,8 @@ bool Stage::IsWall(VECTOR2 pos)
 			SpawnManager* spm = FindGameObject<SpawnManager>();
 			spm->AddSpawnPoint(pos, 2);
 			map[y][x] = 0;
+			Player* p = FindGameObject<Player>();
+			p->AddKnife();
 		}
 		return false;
 	}

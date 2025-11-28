@@ -80,7 +80,7 @@ void Knife::Update()
 
 void Knife::Draw()
 {
-	if (!isAlive) return;
+	//if (!isAlive) return;
 	int x = position.x - imageSize.x / 2.0f;
 	int y = position.y - imageSize.y / 2.0f;
 	Object2D::Draw();

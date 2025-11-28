@@ -35,7 +35,7 @@ Player::Player(VECTOR2 pos)
 	:Gravity(0),
 	JumpHeight(0),
 	MoveSpeed(0),
-	knife_(0),
+	knife_(0),knifeCount_(0),
 	nowPushued(false), onGround(true), prevPushed(false)
 {
 	// パラメーターを読む
@@ -128,20 +128,12 @@ void Player::Update()
 	if (CheckHitKey(KEY_INPUT_N) && IsFired)
 	{
 		nowPushued = true;
+		GetKnifeCount();
 		//KnifeSrrow();
 	}
 
-	//if (prevPushed == false && nowPushued)
-	//{
-	//	if (pCount < MaxPushuCount && knife_ == nullptr)
-	//	{
-	//		KnifeSrrow();
-	//		pCount++; // pCount足されるタイムんぐ調整必要
-	//	}
-	//}
-
 	// 1回押し判定で呼ぶ（前フレームと比較）
-	if (nowPushued && !prevPushed)
+	if (nowPushued && !prevPushed && knifeCount_ != 0)
 	{
 		KnifeSrrow();
 	}
@@ -259,7 +251,7 @@ void Player::Draw()
 void Player::KnifeSrrow()
 {
 	//static VECTOR2 prevPos = position;
-	if (nowPushued && prevPushed == false && knife_ == nullptr && IsFired)
+	if (nowPushued && !prevPushed && knife_ == nullptr && IsFired)
 	{
 		PlaySoundMem(knifeSE, DX_PLAYTYPE_BACK);
 		knife_ = new Knife(position, dir);
@@ -277,6 +269,7 @@ void Player::KnifeSrrow()
 	{
 		PlaySoundMem(warpSE, DX_PLAYTYPE_BACK);
 		position = knife_->GetPosition();  // ワープ
+		knifeCount_--;
 
 		if (nFiredAir)
 			velocityY = JumpV0/2;
@@ -288,6 +281,11 @@ void Player::KnifeSrrow()
 		return;
 	}
 
+}
+
+void Player::AddKnife()
+{
+	knifeCount_++;
 }
 
 void Player::WorkMortion()

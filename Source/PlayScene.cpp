@@ -39,7 +39,7 @@ void PlayScene::Draw()
 	float timer = st->GetTimer();
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), "timer : %3.1f", timer);
-
+	
 	//DrawString(0, 0, "PLAY SCENE", GetColor(255, 255, 255));
 	//DrawString(100, 400, "Push [L]Key To Result", GetColor(255, 255, 255));
 	DrawString(20, 0, buffer, GetColor(255, 255, 255));
