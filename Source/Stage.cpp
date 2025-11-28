@@ -88,7 +88,7 @@ void Stage::Draw()
 	int w = imageSize.x;
 	int h = imageSize.y;
 
-	DrawRectExtendGraph(30, 30, 40 + w / 2, 40 + h / 2, 3 * w, 0 * h, w, h, hImage, TRUE);
+	DrawRectExtendGraph(30, 30, 40 + w / 2, 40 + h / 2, 6 * w, 0 * h, w, h, hImage, TRUE);
 
 	SetFontSize(32);
 	DrawFormatString(100, 30, GetColor(255, 255, 255), "X %d", GetKnifeCount());;
@@ -101,7 +101,7 @@ void Stage::Draw()
 				DrawRectGraph(x * w - scrollX, y * h, 3 * w, 1 * h, w, h, hImage, TRUE);
 			}
 			else if (c == 2) {
-				DrawRectGraph(x * w - scrollX, y * h, 3 * w, 0 * h, w, h, hImage, TRUE);
+				DrawRectGraph(x * w - scrollX, y * h, 6 * w, 0 * h, w, h, hImage, TRUE);
 			}
 			else if (c == 8)
 			{
