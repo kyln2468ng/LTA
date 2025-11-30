@@ -25,7 +25,7 @@ void ResultScene::Update()
 void ResultScene::Draw()
 {
 	SetFontSize(32);
-	float timer =GameData::GetClearTime();
+	float timer =300.0f - GameData::GetClearTime();
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), "クリアタイム : %3.1f", timer);
 	DrawString(200, 100, buffer, GetColor(255, 255, 255));

@@ -35,7 +35,7 @@ Stage::Stage()
 	imageSize = VECTOR2(64, 64);
 	anim = 3;
 	animY = 1;
-	countTimer = 0;
+	countTimer = 300;
 	timer = 1;
 	GameData::clearTime = 0.0f;
 
@@ -65,7 +65,8 @@ Stage::~Stage()
 
 void Stage::Update()
 {
-	countTimer += Time::DeltaTime();
+	countTimer -= Time::DeltaTime();
+
 	SpawnManager* spm = FindGameObject<SpawnManager>();
 	if (spm) {
 		spm->Update();

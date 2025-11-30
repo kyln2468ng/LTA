@@ -53,6 +53,7 @@ Player::Player(VECTOR2 pos)
 			MoveSpeed = csv->GetFloat(i, 1);
 		}
 	}
+
 	JumpV0 = -sqrtf(2.0f * Gravity * JumpHeight);
 	WorkSpeed = MoveSpeed / 2;
 
@@ -94,6 +95,8 @@ void Player::Update()
 	Stage* st = FindGameObject<Stage>();
 	static float prevSpeed = MoveSpeed;
 	static bool sprint = false; // ëñÇËèÛë‘à€éùóp
+
+	int pad = GetJoypadInputState(DX_INPUT_PAD1);
 
 	if (CheckHitKey(KEY_INPUT_D)) {
 		position.x += MoveSpeed;
@@ -192,7 +195,7 @@ void Player::Update()
 
 	{
 		position.y += velocityY;
-		velocityY += Gravity;
+		velocityY += Gravity - Gravity / 5;
 		onGround = false;
 		if (velocityY < 0.0f) {
 			int push = st->CheckUp(position + VECTOR2(-24, -31)); // ç∂è„
@@ -293,8 +296,8 @@ void Player::Draw()
 	Object2D::Draw();
 	Stage* st = FindGameObject<Stage>();
 	float x = position.x - st->ScrollX();
-	DrawBox(x - 22, position.y - 32, x + 22, position.y + 32,
-		GetColor(255, 0, 0), FALSE);
+	//DrawBox(x - 22, position.y - 32, x + 22, position.y + 32,
+	//	GetColor(255, 0, 0), FALSE);
 }
 
 void Player::KnifeSrrow()

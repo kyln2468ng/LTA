@@ -28,7 +28,7 @@ void PlayScene::Update()
 		SceneManager::ChangeScene("RESULT");
 		return;
 	}
-	if (!pl) {
+	if (!pl || st->GetTimer() < 0) {
 		StopSoundMem(bgm);
 		SceneManager::ChangeScene("GAMEOVER");
 		return;
