@@ -29,6 +29,7 @@ private:
 	float JumpHeight;
 	float JumpV0;
 	float MoveSpeed;
+	float WorkSpeed;
 
 	Knife* knife_;
 };

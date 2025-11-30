@@ -32,7 +32,6 @@ Knife::~Knife()
 {
 	if (isAlive == false)
 	{
-		DestroyMe();
 		//new Effect;
 	}
 }
@@ -76,6 +75,10 @@ void Knife::Update()
 		
 	}
 
+	if (position.x > st->ScrollX() + 1280)
+	{
+		isAlive = false;
+	}
 }
 
 void Knife::Draw()

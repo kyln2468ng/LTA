@@ -54,6 +54,7 @@ Player::Player(VECTOR2 pos)
 		}
 	}
 	JumpV0 = -sqrtf(2.0f * Gravity * JumpHeight);
+	WorkSpeed = MoveSpeed / 2;
 
 	hImage = LoadGraph("data/image/player.png");
 	assert(hImage > 0);
@@ -91,9 +92,9 @@ void Player::Update()
 	nowPushued = false;
 	nowPushuedS = false;
 	Stage* st = FindGameObject<Stage>();
-	//if(st == nullptr) {
-	//	this->DestroyMe();
-	//}
+	static float prevSpeed = MoveSpeed;
+	static bool sprint = false; // 走り状態維持用
+
 	if (CheckHitKey(KEY_INPUT_D)) {
 		position.x += MoveSpeed;
 		int push = st->CheckRight(position+VECTOR2(24,-31)); // 右上
@@ -143,10 +144,19 @@ void Player::Update()
 		KnifeSrrow();
 	}
 
+	bool sprintKey = CheckHitKey(KEY_INPUT_LSHIFT) || CheckHitKey(KEY_INPUT_L);
+
+	// 加速状態なら速度アップ
+	MoveSpeed = sprint ? prevSpeed : WorkSpeed;
 	if (onGround)
 	{
 		JumpCnt = 0;
 		IsFired = true;
+		// 地上でのみ入力更新
+		if (sprintKey)
+			sprint = true;
+		else
+			sprint = false;
 	}
 
 	if (CheckHitKey(KEY_INPUT_SPACE))
@@ -185,12 +195,12 @@ void Player::Update()
 		velocityY += Gravity;
 		onGround = false;
 		if (velocityY < 0.0f) {
-			int push = st->CheckUp(position + VECTOR2(-24, -31)); // 左下
+			int push = st->CheckUp(position + VECTOR2(-24, -31)); // 左上
 			if (push > 0) {
 				velocityY = 0.0f;
 				position.y += push;
 			}
-			push = st->CheckUp(position + VECTOR2(24, -31)); // 右下
+			push = st->CheckUp(position + VECTOR2(24, -31)); // 右上
 			if (push > 0) {
 				velocityY = 0.0f;
 				position.y += push;
@@ -271,7 +281,6 @@ void Player::Update()
 	//ImGui::InputFloat("positionX", &position.x);
 	//ImGui::InputFloat("positionY", &position.y);
 	//ImGui::End();
-
 	if (knife_ != nullptr && !knife_->GetAlive())
 	{
 		knife_->DestroyMe();
@@ -284,8 +293,8 @@ void Player::Draw()
 	Object2D::Draw();
 	Stage* st = FindGameObject<Stage>();
 	float x = position.x - st->ScrollX();
-	//DrawBox(x - 24, position.y - 32, x + 24, position.y + 32,
-	//	GetColor(255, 0, 0), FALSE);
+	DrawBox(x - 22, position.y - 32, x + 22, position.y + 32,
+		GetColor(255, 0, 0), FALSE);
 }
 
 void Player::KnifeSrrow()
