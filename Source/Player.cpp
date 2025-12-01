@@ -98,7 +98,7 @@ void Player::Update()
 
 	int pad = GetJoypadInputState(DX_INPUT_PAD1);
 
-	if (CheckHitKey(KEY_INPUT_D)) {
+	if (CheckHitKey(KEY_INPUT_D) && st) {
 		position.x += MoveSpeed;
 		int push = st->CheckRight(position+VECTOR2(24,-31)); // âEè„
 		position.x -= push;
@@ -108,7 +108,7 @@ void Player::Update()
 		animY = 0;
 		WorkMortion();
 	}
-	if (CheckHitKey(KEY_INPUT_A)) {
+	if (CheckHitKey(KEY_INPUT_A) && st) {
 		position.x -= MoveSpeed;
 		int push = st->CheckLeft(position + VECTOR2(-24, -31)); // ç∂è„
 		position.x += push;
@@ -197,7 +197,7 @@ void Player::Update()
 		position.y += velocityY;
 		velocityY += Gravity - Gravity / 5;
 		onGround = false;
-		if (velocityY < 0.0f) {
+		if (velocityY < 0.0f && st) {
 			int push = st->CheckUp(position + VECTOR2(-24, -31)); // ç∂è„
 			if (push > 0) {
 				velocityY = 0.0f;
@@ -210,17 +210,20 @@ void Player::Update()
 			}
 		}
 		else {
-			int push = st->CheckDown(position + VECTOR2(-24, 31+1)); // ç∂â∫
-			if (push > 0) {
-				velocityY = 0.0f;
-				onGround = true;
-				position.y -= push-1;
-			}
-			push = st->CheckDown(position + VECTOR2(24, 31+1)); // âEâ∫
-			if (push > 0) {
-				velocityY = 0.0f;
-				onGround = true;
-				position.y -= push-1;
+			if (st)
+			{
+				int push = st->CheckDown(position + VECTOR2(-24, 31 + 1)); // ç∂â∫
+				if (push > 0) {
+					velocityY = 0.0f;
+					onGround = true;
+					position.y -= push - 1;
+				}
+				push = st->CheckDown(position + VECTOR2(24, 31 + 1)); // âEâ∫
+				if (push > 0) {
+					velocityY = 0.0f;
+					onGround = true;
+					position.y -= push - 1;
+				}
 			}
 		}
 	}

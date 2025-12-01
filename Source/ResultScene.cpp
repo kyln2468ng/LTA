@@ -5,19 +5,14 @@ ResultScene::ResultScene()
 {
 	stareImage = LoadGraph("data/image/stare.png");
 	se = LoadSoundMem("data/sound/result.mp3");
-	bgm = LoadSoundMem("data/sound/clear.mp3");
 	ChangeVolumeSoundMem(128, se);
-	ChangeVolumeSoundMem(128, bgm);
 	PlaySoundMem(se, DX_PLAYTYPE_BACK);
-	WaitTimer(3000);
-	PlaySoundMem(bgm, DX_PLAYTYPE_LOOP);
 }
 
 ResultScene::~ResultScene()
 {
 	DeleteGraph(stareImage);
 	DeleteSoundMem(se);
-	DeleteSoundMem(bgm);
 }
 
 void ResultScene::Update()
