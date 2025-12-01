@@ -4,11 +4,15 @@
 TitleScene::TitleScene()
 {
 	backImage = LoadGraph("data/image/Title.png");
+	bgm = LoadSoundMem("data/sound/title.mp3");
+	ChangeVolumeSoundMem(128, bgm);
+	PlaySoundMem(bgm, DX_PLAYTYPE_LOOP);
 }
 
 TitleScene::~TitleScene()
 {
 	DeleteGraph(backImage);
+	DeleteSoundMem(bgm);
 }
 
 void TitleScene::Update()

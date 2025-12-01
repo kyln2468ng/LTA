@@ -31,6 +31,7 @@ void OperationScene::Update()
 	if (CheckHitKey(KEY_INPUT_P))
 	{
 		SceneManager::ChangeScene("PLAY");
+		gd->dethCount = 0;
 	}
 }
 

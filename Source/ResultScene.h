@@ -16,4 +16,5 @@ public:
 private:
 	int stareImage;
 	int se;
+	int bgm;
 };

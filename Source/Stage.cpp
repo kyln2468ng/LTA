@@ -89,9 +89,9 @@ void Stage::Draw()
 	int w = imageSize.x;
 	int h = imageSize.y;
 
-	DrawRectExtendGraph(30, 30, 40 + w / 2, 40 + h / 2, 6 * w, 0 * h, w, h, hImage, TRUE);
+	DrawRectExtendGraph(20, 20, 40 + w / 2, 40 + h / 2, 6 * w, 0 * h, w, h, hImage, TRUE);
 
-	SetFontSize(32);
+	SetFontSize(25);
 	DrawFormatString(100, 30, GetColor(255, 255, 255), "X %d", GetKnifeCount());;
 	SetFontSize(16);
 
