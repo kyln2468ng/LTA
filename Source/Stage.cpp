@@ -164,6 +164,7 @@ void Stage::SetTile(int x, int y, int tileID)
 bool Stage::IsWall(VECTOR2 pos)
 {
 	// ƒ`ƒbƒv‚ÌêŠ‚ğ“Á’è‚·‚é
+	
 	int x = pos.x / imageSize.x;
 	int y = pos.y / imageSize.y;
 
