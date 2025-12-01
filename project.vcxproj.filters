@@ -74,6 +74,7 @@
     <ClCompile Include="Source\SpawnManager.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
+    <ClCompile Include="Source\RankingScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Source\SpawnManager.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
+    <ClInclude Include="Source\RankingScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

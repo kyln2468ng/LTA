@@ -164,8 +164,7 @@ void Stage::SetTile(int x, int y, int tileID)
 bool Stage::IsWall(VECTOR2 pos)
 {
 	// チップの場所を特定する
-	
-	int x = pos.x / imageSize.x;
+		int x = pos.x / imageSize.x;
 	int y = pos.y / imageSize.y;
 
 	if (y < 0 || y >= map.size()) {
@@ -194,8 +193,14 @@ bool Stage::IsWall(VECTOR2 pos)
 		return false;
 	case 8:
 	{
-		isAlive = false;
-		GameData::SetClearTime(countTimer);
+		if (isAlive) {
+			isAlive = false;
+			GameData::AddClearTime(countTimer);
+			// ResultScene が GetClearTime() を参照するならこちらもセットしておく
+			GameData::SetClearTime(countTimer);
+			// タイルを消して再判定を防ぐ（必要なら）
+			map[y][x] = 0;
+		}
 		return true;
 	}
 	case 10:

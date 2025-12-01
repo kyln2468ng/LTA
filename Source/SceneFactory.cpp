@@ -7,6 +7,7 @@
 #include "ResultScene.h"
 #include "GameOverScene.h"
 #include "OperationScene.h"
+#include "RankingScene.h"
 
 SceneBase* SceneFactory::CreateFirst()
 {
@@ -34,6 +35,10 @@ SceneBase * SceneFactory::Create(const std::string & name)
 	if (name == "OPERATION")
 	{
 		return new OperationScene();
+	}
+	if (name == "RANKING")
+	{
+		return new RankingScene();
 	}
 	MessageBox(NULL, ("éüÇÃÉVÅ[ÉìÇÕÇ†ÇËÇ‹ÇπÇÒ\n" + name).c_str(), "SceneFactory", MB_ICONERROR | MB_OK);
 	assert(false);

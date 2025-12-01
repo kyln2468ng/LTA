@@ -57,7 +57,7 @@ Player::Player(VECTOR2 pos)
 	JumpV0 = -sqrtf(2.0f * Gravity * JumpHeight);
 	WorkSpeed = MoveSpeed / 2;
 
-	hImage = LoadGraph("data/image/player.png");
+	hImage = LoadGraph("data/image/player2.png");
 	assert(hImage > 0);
 
 	jumpSE = LoadSoundMem("data/sound/jump.mp3");

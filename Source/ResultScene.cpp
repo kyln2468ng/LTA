@@ -25,6 +25,9 @@ void ResultScene::Update()
 	if (CheckHitKey(KEY_INPUT_T)) {
 		SceneManager::ChangeScene("TITLE");
 	}
+	if (CheckHitKey(KEY_INPUT_R)) {
+		SceneManager::ChangeScene("RANKING");
+	}
 }
 
 void ResultScene::Draw()
@@ -63,4 +66,5 @@ void ResultScene::Draw()
 
 	SetFontSize(16);
 	DrawString(200, 500, "Push [T]Key To Title", GetColor(255, 255, 255));
+	DrawString(640, 500, "Push [R]Key To RANKING", GetColor(255, 255, 255));
 }

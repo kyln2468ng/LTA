@@ -26,6 +26,7 @@ void PlayScene::Update()
 	GameData* gd = FindGameObject<GameData>();
 
 	if (!st->GetAlive()) {
+		GameData::SetClearTime(st->GetTimer());
 		StopSoundMem(bgm);
 		SceneManager::ChangeScene("RESULT");
 		return;
